@@ -4,8 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Mail\" />
   </ItemGroup>
@@ -22,6 +27,6 @@
     <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EVLib\EVLib.csproj" />
+    <ProjectReference Include="..\EVLib\testactions.csproj" />
   </ItemGroup>
 </Project>

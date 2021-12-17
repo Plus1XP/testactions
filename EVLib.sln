@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testactions", "EVLib\testactions.csproj", "{FA902F63-18D8-4922-818F-7790F734A53C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVLib.UnitTests", "EVLib.UnitTests\EVLib.UnitTests.csproj", "{974A1CC3-80F8-4B36-83B4-69A93AEE7003}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testactions.UnitTests", "EVLib.UnitTests\testactions.UnitTests.csproj", "{974A1CC3-80F8-4B36-83B4-69A93AEE7003}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

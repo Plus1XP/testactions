@@ -24,6 +24,6 @@ jobs:
     - name: Set VERSION variable from tag
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Pack
-      run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
+      run: dotnet pack --configuration Release /p:Version=${VERSION} --output NuGet/EVLib/netstandard2.1/netstandard2.1/
     - name: Push
       run: dotnet nuget push EVLib.${VERSION}.nupkg --source "github"

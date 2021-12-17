@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EVLlib.Extensions;
+using EVLib.Extensions;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EVLlib.Extensions.Tests
+namespace EVLib.Extensions.Tests
 {
     [TestClass()]
     public class StringExtensionTests

@@ -1,4 +1,4 @@
-﻿namespace EVLlib.Enums
+﻿namespace EVLib.Enums
 {
     /// <summary>
     /// Gets or Sets the user interface (UI) visibility of this element.

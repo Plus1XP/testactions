@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace EVLlib.ConsoleTools
+namespace EVLib.ConsoleTools
 {
     public class TextHeader : TextUI
     {

@@ -28,7 +28,7 @@ jobs:
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Pack
       #run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
-      run: dotnet pack --no-build --configuration Release EVLib/EVLib.csproj --output .
+      run: dotnet pack --no-build --configuration Release EVLib/testactions.csproj --output .
     #- name: Push
       #run: dotnet nuget push EVLib.${VERSION}.nupkg --source "github"
       #run: dotnet nuget push *.nupkg --skip-duplicate --no-symbols true

@@ -37,5 +37,5 @@ jobs:
       run: dotnet nuget add source --username plus1xp --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/plus1xp/index.json"
     - name: Push
       #run: dotnet nuget push *.nupkg --api-key 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 --source "github"
-      run: dotnet nuget push *.nupkg --api-key ${{ github.token }} --source "github"
+      run: dotnet nuget push *.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
 

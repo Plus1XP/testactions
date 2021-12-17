@@ -1,12 +1,12 @@
-﻿using EVLlib.Enums;
-using EVLlib.Interfaces;
+﻿using EVLib.Enums;
+using EVLib.Interfaces;
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace EVLlib.Converters
+namespace EVLib.Converters
 {
     public class BooleanToVisibilityConverter : IValueConverter
     {

@@ -15,6 +15,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        source-url: https://nuget.pkg.github.com/plus1xp/index.json
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -26,7 +29,8 @@ jobs:
     - name: Pack
       #run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       run: dotnet pack --no-build --configuration Release EVLib/EVLib.csproj --output .
-
     - name: Push
-      run: dotnet nuget push EVLib.${VERSION}.nupkg --source "github"
+      #run: dotnet nuget push EVLib.${VERSION}.nupkg --source "github"
+      run: dotnet nuget push ./<project>/out/*.nupkg --skip-duplicate --no-symbols true
+
 

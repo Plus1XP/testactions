@@ -21,8 +21,8 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal
-    - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+    #- name: Set VERSION variable from tag
+      #run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Pack
       #run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       run: dotnet pack --configuration Release --no-build  EVLib/testactions.csproj --output .
@@ -37,12 +37,12 @@ jobs:
     - name: Release
       run: echo "Release"
 
-    #- name: Extract version from branch name (for release branches)
-     # if: startsWith(github.event.pull_request.head.ref, 'release/')
-      #run: |
-       # BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
-        #VERSION=${BRANCH_NAME#release/}
-        #echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+    - name: Extract version from branch name (for release branches)
+      if: startsWith(github.event.pull_request.head.ref, 'release/')
+      run: |
+        BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+        VERSION=${BRANCH_NAME#release/}
+        echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
         
    # - name: Extract version from branch name (for hotfix branches)
     #  if: startsWith(github.event.pull_request.head.ref, 'hotfix/')

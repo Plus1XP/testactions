@@ -30,3 +30,8 @@ jobs:
       run: dotnet nuget add source --username plus1xp --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/plus1xp/index.json"
     - name: Push
       run: dotnet nuget push *.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
+    - name: Zip
+      run: zip -r release.zip .
+    - name: Release
+      run: echo "Release"
+

@@ -70,7 +70,7 @@ jobs:
       #with:
         #repo_token: ${{ secrets.GITHUB_TOKEN }}
         # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-        tag_name: ${{ github.ref }}
+        tag_name: ${{ github.GITHUB_REF` }}
         # The name of the release. For example, `Release v1.0.1`
         release_name: Release ${{ github.ref }}
         draft: false

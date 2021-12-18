@@ -52,7 +52,7 @@ jobs:
         echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
         
     - name: Create Release
-      uses: plus1xp/create-release@5.0.0
+      uses: plus1xp/testactions@1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:

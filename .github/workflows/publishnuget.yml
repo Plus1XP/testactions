@@ -37,27 +37,40 @@ jobs:
     - name: Release
       run: echo "Release"
 
-    - name: Extract version from branch name (for release branches)
-      if: startsWith(github.event.pull_request.head.ref, 'release/')
-      run: |
-        BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
-        VERSION=${BRANCH_NAME#release/}
-        echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+    #- name: Extract version from branch name (for release branches)
+     # if: startsWith(github.event.pull_request.head.ref, 'release/')
+      #run: |
+       # BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+        #VERSION=${BRANCH_NAME#release/}
+        #echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
         
-    - name: Extract version from branch name (for hotfix branches)
-      if: startsWith(github.event.pull_request.head.ref, 'hotfix/')
-      run: |
-        BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
-        VERSION=${BRANCH_NAME#hotfix/}
-        echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+   # - name: Extract version from branch name (for hotfix branches)
+    #  if: startsWith(github.event.pull_request.head.ref, 'hotfix/')
+     # run: |
+      #  BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+       # VERSION=${BRANCH_NAME#hotfix/}
+        #echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
         
-    - name: Create Release
-      uses: plus1xp/testactions@1.0.0
+   # - name: Create Release
+    #  uses: plus1xp/testactions@1.0.0
+     # env:
+      #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #with:
+       # target_commitish: ${{ github.event.pull_request.merge_commit_sha }}
+        #tag_name: ${{ env.RELEASE_VERSION }}
+        #name: ${{ env.RELEASE_VERSION }}
+        #draft: false
+        #prerelease: false
+
+    - name: Create a Release
+      id: create_release
+      uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
       with:
-        target_commitish: ${{ github.event.pull_request.merge_commit_sha }}
-        tag_name: ${{ env.RELEASE_VERSION }}
-        name: ${{ env.RELEASE_VERSION }}
+        # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
+        tag_name: github.GITHUB_REF
+        # The name of the release. For example, `Release v1.0.1`
+        release_name: TEST_RELEASE_1
         draft: false
         prerelease: false

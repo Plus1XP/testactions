@@ -22,18 +22,17 @@ jobs:
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack --configuration Release --no-build  EVLib/testactions.csproj --output project
+      run: dotnet pack --configuration Release --no-build  EVLib/testactions.csproj --output package
     - name: Source  
       run: dotnet nuget add source --username plus1xp --password ${{ secrets.GITHUB_TOKEN }}
             --store-password-in-clear-text --name github "https://nuget.pkg.github.com/plus1xp/index.json"
     - name: Push
-      run: dotnet nuget push *.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
+      run: dotnet nuget push package/*.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
     - name: Zip
-      run: zip -r source.zip . -x "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*"
-            ".git/*" ".github/*" ".idea/*" ".vscode/*" "*.DS_Store" "*.nupkg"
+      run: zip -r source.zip . -x "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*" "package/*"
+            ".git/*" ".github/*" ".idea/*" ".vscode/*" "*.DS_Store"
     - name: Zip
-      run: zip -r package.zip . -x "EVLib/*" "EVLib.UnitTests/*" "*.sln" "*.md"
-            ".git/*" ".github/*" ".gitignore" ".idea/*" ".vscode/*" "*.DS_Store" "*.zip"
+      run: zip -r package.zip ./package
     - name: Release
       id: create_release
       uses: actions/create-release@v1
@@ -61,6 +60,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./package.zip
+        asset_path: package/package.zip
         asset_name: package.zip
         asset_content_type: application/zip

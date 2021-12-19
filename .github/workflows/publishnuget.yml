@@ -25,9 +25,7 @@ jobs:
       run: echo "version=${GITHUB_REF/refs\/tags\/v}" >> $GITHUB_ENV
       id: version
     - name: print
-      run: echo "${{ steps.version.outputs.version }}"
-    - name: print
-      run: echo "${{ github.run_number }}"
+      run: echo "${{ version }}"
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Pack

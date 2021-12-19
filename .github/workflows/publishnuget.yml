@@ -40,8 +40,7 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
         draft: true
-        prerelease: false
-        
+        prerelease: false  
     #- name: Asset
       #id: upload-release-asset
       #uses: actions/upload-release-asset@v1
@@ -52,3 +51,10 @@ jobs:
         #asset_path: ./release.zip
         #asset_name: release.zip
         #asset_content_type: application/zip
+    - name: Asset
+      id: upload-release-asset
+      uses: svenstaro/upload-release-action@v2
+      with:
+      repo_token: ${{ secrets.GITHUB_TOKEN }}
+      file: ./release.zip
+      asset_name: Release!

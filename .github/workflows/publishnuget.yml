@@ -29,11 +29,11 @@ jobs:
     - name: Push
       run: dotnet nuget push *.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
     - name: Zip
-      run: zip -r release.zip . -x "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*"
+      run: zip -r source.zip . -x "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*"
             ".git/*" ".github/*" ".idea/*" ".vscode/*" "*.DS_Store" "*.nupkg"
-    - name: Zip 2
-      run: zip -r release2.zip . -x "EVLib/*" "EVLib.UnitTests/*" "*.sln" "*.md"
-            ".git/*" ".github/*" ".gitignore" ".idea/*" ".vscode/*" "*.DS_Store"
+    - name: Zip
+      run: zip -r package.zip . -x "EVLib/*" "EVLib.UnitTests/*" "*.sln" "*.md"
+            ".git/*" ".github/*" ".gitignore" ".idea/*" ".vscode/*" "*.DS_Store" "*.zip"
     - name: Release
       id: create_release
       uses: actions/create-release@v1
@@ -41,34 +41,26 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: r${{ github.run_number }}
-        release_name: Release Run ID ${{ github.run_id }}
-        draft: false
+        release_name: Release Run ${{ github.run_number }}
+        draft: true
         prerelease: false
-    - name: Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./release.zip
-        asset_name: release.zip
-        asset_content_type: application/zip
-    - name: Asset 2
-      id: upload-release-asset2
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./release2.zip
-        asset_name: release2.zip
-        asset_content_type: application/zip
     #- name: Asset
-      #id: upload-release-asset
-      #uses: svenstaro/upload-release-action@v2
+      #id: upload-release-asset-source
+      #uses: actions/upload-release-asset@v1
+      #env:
+        #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #with:
-        #repo_token: ${{ secrets.GITHUB_TOKEN }}
-        #file: ./release.zip
-        #asset_name: New Release
-        #tag: ${{ github.ref }}
+        #upload_url: ${{ steps.create_release.outputs.upload_url }}
+        #asset_path: ./source.zip
+        #asset_name: source.zip
+        #asset_content_type: application/zip
+    - name: Asset
+      id: upload-release-asset-package
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./package.zip
+        asset_name: package.zip
+        asset_content_type: application/zip

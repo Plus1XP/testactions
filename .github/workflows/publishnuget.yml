@@ -22,10 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Version
-      run: echo "::set-output name=version::$(./ --version)"
-      #id: version
-    - name: Version
-      run: echo "::set-output name=version::$(./EVLib --version)"
+      run: echo "version=${GITHUB_REF/refs\/tags\/v}" >> $GITHUB_ENV
       id: version
     - name: print
       run: echo "${{ steps.version.outputs.version }}"

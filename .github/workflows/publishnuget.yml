@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Version
-      run: echo "::set-output name=version::$(.bin/testactions --version)"
+      run: echo "::set-output name=version::$(./bin/testactions --version)"
       id: version
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal

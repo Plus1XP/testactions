@@ -21,6 +21,9 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: Version
+      run: echo "::set-output name=version::$(.bin/testactions --version)"
+      id: version
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Pack
@@ -29,7 +32,7 @@ jobs:
       run: dotnet nuget add source --username plus1xp --password ${{ secrets.GITHUB_TOKEN }}
             --store-password-in-clear-text --name github "https://nuget.pkg.github.com/plus1xp/index.json"
     - name: Push
-      run: dotnet nuget push package/*.nupkg --skip-duplicate --no-symbols --api-key ${{ github.token }} --source "github"
+      run: dotnet nuget push package/*.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
     - name: Zip
       run: zip -r source.zip . -x "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*" "package/*"
             ".git/*" ".github/*" ".idea/*" ".vscode/*" "*.DS_Store"

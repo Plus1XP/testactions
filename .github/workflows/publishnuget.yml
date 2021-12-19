@@ -24,6 +24,12 @@ jobs:
     - name: Version
       run: echo "::set-output name=version::$(. --version)"
       id: version
+    - name: Version
+      run: echo "::set-output name=version::$(./ --version)"
+    - name: Version
+      run: echo "::set-output name=version::$(./EVLib --version)"
+    - name: Version
+      run: echo "::set-output name=version::$(./EVLib/testactions --version)"
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Pack

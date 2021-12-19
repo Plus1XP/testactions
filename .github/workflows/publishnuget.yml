@@ -19,6 +19,7 @@ jobs:
           5.0.x
     - name: Restore
       run: dotnet restore
+      working-directory: ./project
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ./project

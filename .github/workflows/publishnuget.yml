@@ -21,13 +21,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Version
-      run: echo "version=${GITHUB_REF/refs\/tags}" >> $GITHUB_ENV
-      id: version
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: print
-      run: echo "${version}"
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Pack

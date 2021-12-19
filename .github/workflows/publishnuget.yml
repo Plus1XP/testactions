@@ -58,7 +58,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./*.nupkg
+        asset_path: ./testactions.1.0.2.nupkg
         asset_name: release.nupkg
         asset_content_type: application/nupkg
     #- name: Asset

@@ -22,14 +22,15 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Version
-      run: echo "::set-output name=version::$(. --version)"
-      id: version
-    - name: Version
       run: echo "::set-output name=version::$(./ --version)"
+      id: v1
     - name: Version
       run: echo "::set-output name=version::$(./EVLib --version)"
-    - name: Version
-      run: echo "::set-output name=version::$(./EVLib/testactions --version)"
+      id: v2
+    - name: print
+      run: echo "${{ steps.v1.outputs.version }}"
+    - name: print
+      run: echo "${{ steps.v2.outputs.version }}"
     - name: Test
       run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Pack

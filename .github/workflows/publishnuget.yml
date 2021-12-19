@@ -58,3 +58,4 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ./release.zip
         asset_name: Release!
+        tag: v2

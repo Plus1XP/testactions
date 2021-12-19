@@ -27,12 +27,12 @@ jobs:
       #run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       run: dotnet pack --configuration Release --no-build  EVLib/testactions.csproj --output .
     - name: Source  
-      run: dotnet nuget add source --username plus1xp --password ${{ secrets.GITHUB_TOKEN }} 
+      run: dotnet nuget add source --username plus1xp --password ${{ secrets.GITHUB_TOKEN }} |
             --store-password-in-clear-text --name github "https://nuget.pkg.github.com/plus1xp/index.json"
     - name: Push
       run: dotnet nuget push *.nupkg --skip-duplicate --api-key ${{ github.token }} --source "github"
     - name: Zip
-      run: zip -r release.zip . -x "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*"
+      run: zip -r release.zip . -x "EVLib/obj/*" "EVLib.UnitTests/bin/*" "EVLib.UnitTests/obj/*" |
             ".git/*" ".github/*" ".idea/*" ".vscode/*" "*.DS_Store" "*.nupkg"
     - name: Release
       run: echo "Release"
@@ -70,13 +70,11 @@ jobs:
       with:
         #repo_token: ${{ secrets.GITHUB_TOKEN }}
         # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-        tag_name: ${{ github.ref }}
+        tag_name: ${{ github.base_ref }}
         # The name of the release. For example, `Release v1.0.1`
-        release_name: Release ${{ steps.version.outputs.version }}
+        release_name: Release ${{ github.ref }}
         draft: false
         prerelease: false
-        files: |
-          ./release.zip
         
     #- name: Upload Release Asset
       #id: upload-release-asset

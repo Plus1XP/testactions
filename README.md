@@ -21,16 +21,6 @@ Personal library targeting .NET Standard
 
 [Mathamatics](#mathamatics)
 
-**Unit Tests**
-
-[ExtensionsTest](#extensionstest)
-
-[FileIOTest](#fileiotest)
-
-[MailTest](#mailtest)
-
-[MathamaticsTest](#mathamaticstest)
-
 # ConsoleTools
 
 [`TextUI`](#evlibconsoletoolstextui)
@@ -2096,6 +2086,10 @@ string confirmation = calendarManager.DeleteICSFile(string filePath)
 
 ## EVLib.FileIO.XMLManager : [FileManager](#evlibfileiofilemanager)
 
+**Samples**
+
+[`Example XML Document`](#example-xml-document)
+
 **Constructors** :
 
 [`public XMLManager()`]
@@ -2133,6 +2127,40 @@ string confirmation = calendarManager.DeleteICSFile(string filePath)
 [`public void SetNodeAttributeFromBool(XmlNode node, string attributeName, bool attributeValue)`](#setnodeattributefrombool-node-attributename-attributevalue)
 
 ---
+
+### Example XML Document
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+  <Formula1>
+    <Event Name="Practice" Saved="True" />
+    <Event Name="Qualifying" Saved="True" />
+    <Event Name="Race" Saved="True" />
+    <Event Name="Reminder" Saved="True" />
+    <Event Name="Trigger" Saved="15" />
+  </Formula1>
+  <MotoGP>
+    <Event Name="Practice" Saved="True" />
+    <Event Name="Qualifying" Saved="True" />
+    <Event Name="Warmup" Saved="False" />
+    <Event Name="Race" Saved="True" />
+    <Event Name="Moto2" Saved="False" />
+    <Event Name="Moto3" Saved="False" />
+    <Event Name="BehindTheScenes" Saved="False" />
+    <Event Name="AfterTheFlag" Saved="False" />
+    <Event Name="Reminder" Saved="True" />
+    <Event Name="Trigger" Saved="15" />
+  </MotoGP>
+  <WorldSBK>
+    <Event Name="Practice" Saved="True" />
+    <Event Name="Superpole" Saved="True" />
+    <Event Name="Warmup" Saved="False" />
+    <Event Name="Race" Saved="True" />
+    <Event Name="Reminder" Saved="True" />
+    <Event Name="Trigger" Saved="15" />
+  </WorldSBK>
+</Settings>
+```
 
 ### GetNodeAttributeValueAsBool (XmlFileLocation, NodePath, NodeName, NodeValue, AttributeName)
 
@@ -3831,7 +3859,7 @@ public long Power(int baseNumber, int exponent)
 
 ***Parameter***
 
-`int` baseNumber"
+`int` baseNumber
 
 he base number to be multiplied.
 

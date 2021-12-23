@@ -1,69 +1,288 @@
 # EVLib
+
 Personal library targeting .NET Standard
 
 **Class Libraries**
 
 [ConsoleTools](#consoletools)
 
+- [TextUI](#evlibconsoletoolstextui)
+
+    - [public String GetTextResponse(String)](#gettextresponse-string)
+
+    - [public Char GetCharResponse(String)](#getcharresponse-string)
+
+    - [public Int32 GetNumericResponse(String, Int32, Int32)](#getnumericresponse-string-int32-int32)
+
+    - [public String GetResponse()](#getresponse)
+
+    - [public Void AwaitResponse()](#awaitresponse)
+
+    - [public Void ChangeTextColour(ConsoleColor)](#changetextcolour-consolecolour)
+
+    - [public Void ResetTextColour()](#resettextcolour)
+
+    - [public Void SetConsoleTitle(String)](#setconsoletitle-string)
+
+    - [public Void Print(String)](#print-string)
+
+    - [public Void PrintToCenterScreen(String)](#printtocenterscreen-string)
+
+    - [public Void PrintBlankLine()](#printblankline)
+
+    - [public Void ClearScreen()](#clearscreen)
+
+- [TextHeader](#evlibconsoletoolstextheader--textui)
+
+    - [public Void PrintHeader()](#printheader)
+
+    - [public Void PrintHeader(String)](#printheader-string)
+
+    - [public Void PrintHeader(String, String)](#printheader-string-string)
+
+    - [public Void PrintHeader(String, String, String)](#printheader-string-string-string)
+
+    - [public Void PrintHeader(String, String, String, String)](#printheader-string-string-string-string)
+
+    - [public Void PrintHeader(String, String, String, String, String)](#printheader-string-string-string-string-string)
+
 [Converters](#converters)
+
+- [BooleanToVisibility](#evlibconvertersbooleantovisibility--ivalueconverter)
+
+    - [public Object Convert(Object, Type, Object, CultureInfo)](#convert-object-type-object-cultureinfo)
+
+    - [public Object ConvertBack(Object, Type, Object, CultureInfo)](#convertback-object-type-object-cultureinfo)
 
 [Debugging](#debugging)
 
+- [Actions](#evlibdebuggingactions)
+
+    - [public static Void Time(Action)](#time-action)  
+
 [Enums](#enums)
+
+- [Visibility](#evlibenumsvisibility)
+
+    - [public enum Visibility](#visibility)
 
 [Extensions](#extensions)
 
+- [ObjectExtension](#evlibextensionsobjectextension)
+
+    - [public static void ShallowCopy(this Object, Object)](#shallowcopy-object-object)
+
+- [StringExtension](#evlibextensionsstringextension)
+
+    - [public static string Between(this String, String, String)](#between-string-string-string)
+
+    - [public static string Before(this String, String)](#before-string-string)
+
+    - [public static string After(this String, String)](#after-string-string)
+
+    - [public static string RemoveWords(this String, String[])](#removewords-string-string)
+
+    - [public static string ReplaceLetters(this String, Char, Char)](#replaceletters-string-char-char)
+
+    - [public static string ReduceWhitespaces(this String)](#reducewhitespaces-string)
+
 [FileIO](#fileio)
+
+- [FileManager](#evlibfileiofilemanager)
+
+    - [public Boolean IsFolderCreated(String)](#isfoldercreated-string)
+
+    - [public Boolean IsFileCreated(String)](#isfilecreated-string)
+
+    - [public Void CreateFolder(String)](#createfolder-string)
+
+    - [public Void CreateFile(String)](#createfile-string)
+
+    - [public Void ClearFile(String)](#clearfile-string)
+
+    - [public Void DeleteFolder(String)](#deletefolder-string)
+
+    - [public Void DeleteFile(String)](#deletefile-string)
+
+    - [public Void SaveToFile(String, String)](#savetofile-string-string)
+
+    - [public Void SaveToFile(String, Byte[])](#savetofile-string-byte)
+
+    - [public String ReadStringFromFile(String)](#readstringfromfile-string)
+
+    - [public Byte[] ReadBytesFromFile(String)](#readbytesfromfile-string)
+
+    - [public String ReadLineFromFile(String, Int32)](#readlinefromfile-string-int32)
+
+- [CalendarManager](#evlibfileiocalendarmanager--filemanager)
+
+    - [public DateTime ParseDateTimeToUTC(String)](#parsedatetimetoutc-string)
+
+    - [public DateTime ParseDateTimeToLocal(String)](#parsedatetimetolocal-string)
+
+    - [public Void CreateCalendarEntry(String)](#createcalendarentry-string)
+
+    - [public Void CreateGMTCalendarTimeZoneEntry()](#creategmtcalendartimezoneentry)
+
+    - [public Void CreateCalendarEvent(DateTime, DateTime, String, String, String)](#createcalendarevent-datetime-datetime-string-string-string)
+
+    - [public Void CreateCalendarAlarmEntry(Int32, String)](#createcalendaralarmentry-int32-string)
+
+    - [public Void CloseEventEntry()](#closeevententry)
+
+    - [public Void CloseCalendarEntry()](#closecalendarentry)
+
+    - [public String CreateICSFile(String)](#createicsfile-string)
+
+    - [public String ReadICSFile(String)](#readicsfile-string)
+
+    - [public String DeleteICSFile(String)](#deleteicsfile-string)
+
+- [XMLManager](#evlibfileioxmlmanager--filemanager)
+
+    - [Example XML Document](#example-xml-document)
+
+    - [public bool GetNodeAttributeValueAsBool(String, String, String, String, String)](#getnodeattributevalueasbool-string-string-string-string-string)
+
+    - [public int GetNodeAttributeValueAsInt(String, String, String, String, String)](#getnodeattributevalueasint-string-string-string-string-string)
+
+    - [public void SetNodeAttributeValueFromBool(String, String, String, String, String, Boolean)](#setnodeattributevaluefrombool-string-string-string-string-string-boolean)
+
+    - [public void SetNodeAttributeValueFromInt(String, String, String, String, String, Int32)](#setnodeattributevaluefromint-string-string-string-string-string-int32)
+
+    - [public XmlDocument LoadXmlDocument(String)](#loadxmldocument-string)
+
+    - [public XmlNodeList LoadNodeList(XmlDocument, String)](#loadnodelist-xmldocument-string)
+
+    - [public void SaveXmlDocument(XmlDocument, String)](#savexmldocument-xmldocument-string)
+
+    - [public XmlNode GetNodeFromNodeList(XmlNodeList, String, String)](#getnodefromnodelist-xmlnodelist-string-string)
+
+    - [public XmlAttribute GetAttributeFromNodeList(XmlNodeList, String, String, String)](#getattributefromnodelist-xmlnodelist-string-string-string)
+
+    - [public string GetAttributeValueAsString(XmlAttribute)](#getattributevalueasstring-xmlattribute)
+
+    - [public int GetAttributeValueAsInt(XmlAttribute)](#getattributevalueasint-xmlattribute)
+
+    - [public bool GetAttributeValueAsBool(XmlAttribute)](#getattributevalueasbool-xmlattribute)
+
+- [EncryptorManager](#evlibfileioencryptormanager--filemanager)
+
+    - [public Void EncryptToFile(String, String, String)](#encrypttofile-string-string-string)
+
+    - [public String EncryptToString(String, String)](#encrypttostring-string-string)
+
+    - [public Byte[] EncryptToByteArray(String, String)](#encrypttobytearray-string-string)
+
+    - [public String DecryptFromFile(String, String)](#decryptfromfile-string-string)
+
+    - [public String DecryptFromString(String, String)](#decryptfromstring-string-string)
+
+    - [public String DecryptFromByteArray(Byte[], String)](#decryptfrombytearray-byte-string)
+
+- [EncryptionManager](#evlibfileioencryptionmanager--filemanager) [Obsolete]
+
+    - [public EncryptionManager()](#encryptionmanager)
+
+    - [public void EncryptStringToFile(String, String, String)](#encryptstringtofile-string-string-string)
+
+    - [public string DecryptStringF romFile(String, String)](#decryptstringfromfile-string-string)
 
 [Interfaces](#interfaces)
 
+- [IValueConverter](#evlibinterfacesivalueconverter)
+
+    - [public abstract Object Convert(Object, Type, Object, CultureInfo)](#convert-object-type-object-cultureinfo)
+
+    - [public abstract Object ConvertBack(Object, Type, Object, CultureInfo)](#convertback-object-type-object-cultureinfo)
+
 [Mail](#mail)
+
+- [Client](#evlibmailclient)
+
+    - [public MessageField Field](#evlibmailmessagefield)
+
+    - [public ServerSettings Server](#evlibmailserversettings)
+
+    - [public Client()](#client)
+
+    - [public Client(ServerSettings)](#client-serversettings)
+
+    - [public Client(String, Int32, Boolean)](#client-string-int32-boolean)
+
+    - [public Client(String, Int32, String, String, Boolean)](#client-string-int32-string-string-boolean)
+
+    - [public String Send()](#send)
+
+    - [public String Send(MessageField messageField)](#send-messagefield)
+
+    - [public String Send(String, String, String, String, String, String, String)](#send-string-string-string-string-string-string-string)
+
+- [MessageField](#evlibmailmessagefield)
+
+    - [public MessageField(String, String, String, String, String, String, String)](#messagefield-string-string-string-string-string-string-string)
+
+- [ServerSettings](#evlibmailserversettings)
+
+    - [public ServerSettings(String, Int32, String, String, Boolean)](#serversettings-string-int32-string-string-boolean)
+
+    - [public ServerSettings(String, Int32, Boolean)](#serversettings-string-int32-boolean)
 
 [Mathamatics](#mathamatics)
 
+- [Calculate](#evlibmathamaticscalculate)
+
+    - [public Int64 Power(Int32, Int32)](#power-int32-int32)
+
+    - [public Double Average(List Double)](#average-list-double)
+
+    - [public Int32 RandomNumber(Int32, Int32)](#randomnumber-int32-int32)
+
+- [Cipher](#evlibmathamaticscipher)
+
+    - [public String Encode(String, String)](#encode-string-string)
+
+    - [public String Decode(String, String)](#decode-string-string)
+
 # ConsoleTools
 
-[`TextUI`](#evlibconsoletoolstextui)
+[TextUI](#evlibconsoletoolstextui)
 
-[`TextHeader`](#evlibconsoletoolstextheader--textui)
+[TextHeader](#evlibconsoletoolstextheader--textui)
 
 ---
 
 ## EVLib.ConsoleTools.TextUI
 
-**Constructors** :
-
-[`public TextUI()`]
-
 **Methods**
 
-[`public String GetTextResponse(String DisplayText)`](#gettextresponse-displaytext)
+[public String GetTextResponse(String)](#gettextresponse-string)
 
-[`public Char GetCharResponse(String DisplayText)`](#getcharresponse-displaytext)
+[public Char GetCharResponse(String)](#getcharresponse-string)
 
-[`public Int32 GetNumericResponse(String DisplayText, Int32 minSelection, Int32 maxSelection)`](#getnumericresponse-displaytext-minselection-maxselection)
+[public Int32 GetNumericResponse(String, Int32, Int32)](#getnumericresponse-string-int32-int32)
 
-[`public String GetResponse()`](#getresponse)
+[public String GetResponse()](#getresponse)
 
-[`public Void AwaitResponse()`](#awaitresponse)
+[public Void AwaitResponse()](#awaitresponse)
 
-[`public Void ChangeTextColour(ConsoleColor colour)`](#changetextcolour-colour)
+[public Void ChangeTextColour(ConsoleColor)](#changetextcolour-consolecolour)
 
-[`public Void ResetTextColour()`](#resettextcolour)
+[public Void ResetTextColour()](#resettextcolour)
 
-[`public Void SetConsoleTitle(String title)`](#setconsoletitle-title)
+[public Void SetConsoleTitle(String)](#setconsoletitle-string)
 
-[`public Void Print(String text)`](#print-text)
+[public Void Print(String)](#print-string)
 
-[`public Void PrintToCenterScreen(String text)`](#printtocenterscreen-text)
+[public Void PrintToCenterScreen(String)](#printtocenterscreen-string)
 
-[`public Void PrintBlankLine()`](#printblankline)
+[public Void PrintBlankLine()](#printblankline)
 
-[`public Void ClearScreen()`](#clearscreen)
+[public Void ClearScreen()](#clearscreen)
 
 ---
 
-### GetTextResponse (DisplayText)
+### GetTextResponse (String)
 
 ***Summary***
 
@@ -99,7 +318,7 @@ string response = textUI.GetTextResponse("Enter name");
 
 ---
 
-### GetCharResponse (DisplayText)
+### GetCharResponse (String)
 
 ***Summary***
 
@@ -135,7 +354,7 @@ char response = textUI.GetCharResponse("Enter initial");
 
 ---
 
-### GetNumericResponse (DisplayText, MinSelection, MaxSelection)
+### GetNumericResponse (String, Int32, Int32)
 
 ***Summary***
 
@@ -229,7 +448,7 @@ textUI.AwaitResponse();
 
 ---
 
-### ChangeTextColour (Colour)
+### ChangeTextColour (ConsoleColour)
 
 ***Summary***
 
@@ -281,7 +500,7 @@ textUI.ResetTextColour();
 
 ---
 
-### SetConsoleTitle (Title)
+### SetConsoleTitle (String)
 
 ***Summary***
 
@@ -309,7 +528,7 @@ textUI.SetConsoleTitle("MobileApp");
 
 ---
 
-### Print (Text)
+### Print (String)
 
 ***Summary***
 
@@ -337,7 +556,7 @@ textUI.Print("Sample Text");
 
 ---
 
-### PrintToCenterScreen (Text)
+### PrintToCenterScreen (String)
 
 ***Summary***
 
@@ -411,23 +630,19 @@ textUI.ClearScreen();
 
 ## EVLib.ConsoleTools.TextHeader : [TextUI](#evlibconsoletoolstextui)
 
-**Constructors** :
-
-[`public TextHeader()`]
-
 **Methods** :
 
 [public Void PrintHeader()](#printheader)
 
-[`public Void PrintHeader(String contact)`](#printheader-contact)
+[public Void PrintHeader(String)](#printheader-string)
 
-[`public Void PrintHeader(String contact, String dismiss)`](#printheader-contact-dismiss)
+[public Void PrintHeader(String, String)](#printheader-string-string)
 
-[`public Void PrintHeader(String title, String version, String release)`](#printheader-title-version-release)
+[public Void PrintHeader(String, String, String)](#printheader-string-string-string)
 
-[`public Void PrintHeader(String title, String version, String release, String contact)`](#printheader-title-version-release-contact)
+[public Void PrintHeader(String, String, String, String)](#printheader-string-string-string-string)
 
-[`public Void PrintHeader(String title, String version, String release, String contact, String dismiss)`](#printheader-title-version-release-contact-dismiss)
+[public Void PrintHeader(String, String, String, String, String)](#printheader-string-string-string-string-string)
 
 ---
 
@@ -453,7 +668,7 @@ textHeader.PrintHeader();
 
 ---
 
-### PrintHeader (Contact)
+### PrintHeader (String)
 
 ***Summary***
 
@@ -481,7 +696,7 @@ textHeader.PrintHeader("https://www.contoso.com");
 
 ---
 
-### PrintHeader (Contact, Dismiss)
+### PrintHeader (String, String)
 
 ***Summary***
 
@@ -513,7 +728,7 @@ textHeader.PrintHeader("https://www.contoso.com", "Press any key to dismiss...")
 
 ---
 
-### PrintHeader (Title, Version, Release)
+### PrintHeader (String, String, String)
 
 ***Summary***
 
@@ -549,7 +764,7 @@ textHeader.PrintHeader("MobileApp", "Version 1.0.0", "01/Jan/2000");
 
 ---
 
-### PrintHeader (Title, Version, Release, Contact)
+### PrintHeader (String, String, String, String)
 
 ***Summary***
 
@@ -589,7 +804,7 @@ textHeader.PrintHeader("MobileApp", "Version 1.0.0", "01/Jan/2000", "https://www
 
 ---
 
-### PrintHeader (Title, Version, Release, Contact, Dismiss)
+### PrintHeader (String, String, String, String, String)
 
 ***Summary***
 
@@ -635,7 +850,7 @@ textHeader.PrintHeader("MobileApp", "Version 1.0.0", "01/Jan/2000", "https://www
 
 # Converters
 
-[`BooleanToVisibility`](#evlibconvertersbooleantovisibility--ivalueconverter)
+[BooleanToVisibility](#evlibconvertersbooleantovisibility--ivalueconverter)
 
 ---
 
@@ -643,13 +858,13 @@ textHeader.PrintHeader("MobileApp", "Version 1.0.0", "01/Jan/2000", "https://www
 
 **Methods** :
 
-[`public Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)`](#convert)
+[public Object Convert(Object, Type, Object, CultureInfo)](#convert-object-type-object-cultureinfo)
 
-[`public Object ConvertBack(Object value, Type targetType, Object parameter, CultureInfo culture)`](#convertback)
+[public Object ConvertBack(Object, Type, Object, CultureInfo)](#convertback-object-type-object-cultureinfo)
 
 ---
 
-### Convert
+### Convert (Object, Type, Object, CultureInfo)
 
 ***Summary***
 
@@ -697,7 +912,7 @@ Visible or Hidden.
 
 ---
 
-### ConvertBack
+### ConvertBack (Object, Type, Object, CultureInfo)
 
 ***Summary***
 
@@ -748,7 +963,7 @@ Boolean Value.
 
 # Debugging
 
-[`Actions`](#evlibdebuggingactions)
+[Actions](#evlibdebuggingactions)
 
 ---
 
@@ -756,7 +971,7 @@ Boolean Value.
 
 **Methods** :
 
-[`public static Void Time(Action action)`](#time-action)  
+[public static Void Time(Action)](#time-action)
 
 ---
 
@@ -798,11 +1013,13 @@ Debug.Print(timeElapsed);
 
 # Enums
 
-[`Visibility`](#evlibenumsvisibility)
+[Visibility](#evlibenumsvisibility)
 
 ---
 
 ## EVLib.Enums.Visibility
+
+[public enum Visibility](#visibility)
 
 ---
 
@@ -831,9 +1048,9 @@ return (bool)value ? Visibility.Visible : Visibility.Hidden;
 
 # Extensions
 
-[`ObjectExtension`](#evlibextensionsobjectextension)
+[ObjectExtension](#evlibextensionsobjectextension)
 
-[`StringExtension`](#evlibextensionsstringextension)
+[StringExtension](#evlibextensionsstringextension)
 
 ---
 
@@ -841,11 +1058,11 @@ return (bool)value ? Visibility.Visible : Visibility.Hidden;
 
 **Methods** :
 
-[`public static void ShallowCopy(this object destinationObjct, object sourceObject)`](#shallowcopy)
+[public static void ShallowCopy(this Object, Object)](#shallowcopy-object-object)
 
 ---
 
-### ShallowCopy
+### ShallowCopy (Object, Object)
 
 ***Summary***
 
@@ -881,21 +1098,21 @@ destinationObject.ShallowCopy(sourceObject);
 
 **Methods** :
 
-[`public static string Between(this string value, string a, string b)`](#between)
+[public static string Between(this String, String, String)](#between-string-string-string)
 
-[`public static string Before(this string value, string a)`](#before)
+[public static string Before(this String, String)](#before-string-string)
 
-[`public static string After(this string value, string a)`](#after)
+[public static string After(this String, String)](#after-string-string)
 
-[`public static string RemoveWords(this string value, string[] excludedWords)`](#removewords)
+[public static string RemoveWords(this String, String[])](#removewords-string-string)
 
-[`public static string ReplaceLetters(this string wordToSearch, char letterToFind, char letterToReplace)`](#replaceletters)
+[public static string ReplaceLetters(this String, Char, Char)](#replaceletters-string-char-char)
 
-[`public static string ReduceWhitespaces(this string value)`](#reducewhitespaces)
+[public static string ReduceWhitespaces(this String)](#reducewhitespaces-string)
 
 ---
 
-### Between
+### Between (String, String, String)
 
 ***Summary***
 
@@ -941,7 +1158,7 @@ Console.WriteLine(results);
 
 ---
 
-### Before
+### Before (String, String)
 
 ***Summary***
 
@@ -983,7 +1200,7 @@ Console.WriteLine(results);
 
 ---
 
-### After
+### After (String, String)
 
 ***Summary***
 
@@ -1025,7 +1242,7 @@ Console.WriteLine(results);
 
 ---
 
-### RemoveWords
+### RemoveWords (String, String[])
 
 ***Summary***
 
@@ -1067,7 +1284,7 @@ Console.WriteLine(results);
 
 ---
 
-### ReplaceLetters
+### ReplaceLetters (String, Char, Char)
 
 ***Summary***
 
@@ -1113,7 +1330,7 @@ Console.WriteLine(results);
 
 ---
 
-### ReduceWhitespaces
+### ReduceWhitespaces (String)
 
 ***Summary***
 
@@ -1157,53 +1374,49 @@ Console.WriteLine(results);
 
 # FileIO
 
-[`FileManager`](#evlibfileiofilemanager)
+[FileManager](#evlibfileiofilemanager)
 
-[`CalendarManager`](#evlibfileiocalendarmanager--filemanager)
+[CalendarManager](#evlibfileiocalendarmanager--filemanager)
 
-[`XMLManager`](#evlibfileioxmlmanager--filemanager)
+[XMLManager](#evlibfileioxmlmanager--filemanager)
 
-[`EncryptorManager`](#evlibfileioencryptormanager--filemanager)
+[EncryptorManager](#evlibfileioencryptormanager--filemanager)
 
-[`EncryptionManager`](#evlibfileioencryptionmanager)
+[EncryptionManager](#evlibfileioencryptionmanager--filemanager)
 
 ---
 
 ## EVLib.FileIO.FileManager
 
-**Constructors** :
-
-[`public FileManager()`]
-
 **Methods** :
 
-[`public Boolean IsFolderCreated(folderPath)`](#isfoldercreated-folderpath)
+[public Boolean IsFolderCreated(String)](#isfoldercreated-string)
 
-[`public Boolean IsFileCreated(filePath)`](#isfilecreated-filepath)
+[public Boolean IsFileCreated(String)](#isfilecreated-string)
 
-[`public Void CreateFolder(folderPath)`](#createfolder-folderpath)
+[public Void CreateFolder(String)](#createfolder-string)
 
-[`public Void CreateFile(filePath)`](#createfile-filepath)
+[public Void CreateFile(String)](#createfile-string)
 
-[`public Void ClearFile(filePath)`](#clearfile-filepath)
+[public Void ClearFile(String)](#clearfile-string)
 
-[`public Void DeleteFolder(folderPath)`](#deletefolder-folderpath)
+[public Void DeleteFolder(String)](#deletefolder-string)
 
-[`public Void DeleteFile(filePath)`](#deletefile-filepath)
+[public Void DeleteFile(String)](#deletefile-string)
 
-[`public Void SaveToFile(filePath, Value)`](#savetofile-filepath-string-value)
+[public Void SaveToFile(String, String)](#savetofile-string-string)
 
-[`public Void SaveToFile(filePath, Value)`](#savetofile-filepath-byte-value)
+[public Void SaveToFile(String, Byte[])](#savetofile-string-byte)
 
-[`public String ReadStringFromFile(filePath)`](#readstringfromfile-filepath)
+[public String ReadStringFromFile(String)](#readstringfromfile-string)
 
-[`public Byte[] ReadBytesFromFile(filePath)`](#readbytesfromfile-filepath)
+[public Byte[] ReadBytesFromFile(String)](#readbytesfromfile-string)
 
-[`public String ReadLineFromFile(filePath, lineNumber)`](#readlinefromfile-filepath-linenumber)
+[public String ReadLineFromFile(String, Int32)](#readlinefromfile-string-int32)
 
 ---
 
-### IsFolderCreated (FolderPath)
+### IsFolderCreated (String)
 
 ***Summary***
 
@@ -1247,7 +1460,7 @@ if (!fileManager.IsFolderCreated(folderPath))
 
 ---
 
-### IsFileCreated (filePath)
+### IsFileCreated (String)
 
 ***Summary***
 
@@ -1290,7 +1503,7 @@ if (!fileManager.IsFileCreated(filePath))
 
 ---
 
-### CreateFolder (folderPath)
+### CreateFolder (String)
 
 ***Summary***
 
@@ -1324,7 +1537,7 @@ fileManager.CreateFolder(folderPath);
 
 ---
 
-### CreateFile (filePath)
+### CreateFile (String)
 
 ***Summary***
 
@@ -1358,7 +1571,7 @@ fileManager.CreateFile(filePath);
 
 ---
 
-### ClearFile (filePath)
+### ClearFile (String)
 
 ***Summary***
 
@@ -1392,7 +1605,7 @@ fileManager.ClearFile(fileName);
 
 ---
 
-### DeleteFolder (folderPath)
+### DeleteFolder (String)
 
 ***Summary***
 
@@ -1430,7 +1643,7 @@ This operation is recursive and will delete all subdirectories and files.
 
 ---
 
-### DeleteFile (filePath)
+### DeleteFile (String)
 
 ***Summary***
 
@@ -1468,7 +1681,7 @@ Retry pattern tries 3 times (NumberOfRetries) with a 1 second delay (DelayOnretr
 
 ---
 
-### SaveToFile (filePath, string value)
+### SaveToFile (String, String)
 
 ***Summary***
 
@@ -1508,7 +1721,7 @@ fileManager.SaveToFile(filePath, sampleString);
 
 ---
 
-### SaveToFile (filePath, byte value)
+### SaveToFile (String, Byte[])
 
 ***Summary***
 
@@ -1548,7 +1761,7 @@ fileManager.SaveToFile(testFile, sampleBytes);
 
 ---
 
-### ReadStringFromFile (filePath)
+### ReadStringFromFile (String)
 
 ***Summary***
 
@@ -1588,7 +1801,7 @@ string textFromFile = fileManager.ReadStringFromFile(filePath);
 
 ---
 
-### ReadBytesFromFile (filePath)
+### ReadBytesFromFile (String)
 
 ***Summary***
 
@@ -1628,7 +1841,7 @@ byte[] bytesFromFile = fileManager.ReadBytesFromFile(filePath);
 
 ---
 
-### ReadLineFromFile (filePath, Linenumber)
+### ReadLineFromFile (String, Int32)
 
 ***Summary***
 
@@ -1676,37 +1889,33 @@ string lineFromFile = fileManager.ReadLineFromFile(filePath, lineToRead);
 
 ## EVLib.FileIO.CalendarManager : [FileManager](#evlibfileiofilemanager)
 
-**Constructors** :
-
-[`public CalendarManager()`]
-
 **Methods** :
 
-[`public DateTime ParseDateTimeToUTC(String dateTime)`](#parsedatetimetoutc-datetime)
+[public DateTime ParseDateTimeToUTC(String)](#parsedatetimetoutc-string)
 
-[`public DateTime ParseDateTimeToLocal(String dateTime)`](#parsedatetimetolocal-datetime)
+[public DateTime ParseDateTimeToLocal(String)](#parsedatetimetolocal-string)
 
-[`public Void CreateCalendarEntry(String productID)`](#createcalendarentry-productid)
+[public Void CreateCalendarEntry(String)](#createcalendarentry-string)
 
-[`public Void CreateGMTCalendarTimeZoneEntry()`](#creategmtcalendartimezoneentry)
+[public Void CreateGMTCalendarTimeZoneEntry()](#creategmtcalendartimezoneentry)
 
-[`public Void CreateCalendarEvent(DateTime startTime, DateTime endTime, String subject, String location, String description)`](#createcalendarevent-starttime-endtime-subject-location-description)
+[public Void CreateCalendarEvent(DateTime, DateTime, String, String, String)](#createcalendarevent-datetime-datetime-string-string-string)
 
-[`public Void CreateCalendarAlarmEntry(Int32 trigger, String subject)`](#createcalendaralarmentry-trigger-subject)
+[public Void CreateCalendarAlarmEntry(Int32, String)](#createcalendaralarmentry-int32-string)
 
-[`public Void CloseEventEntry()`](#closeevententry)
+[public Void CloseEventEntry()](#closeevententry)
 
-[`public Void CloseCalendarEntry()`](#closecalendarentry)
+[public Void CloseCalendarEntry()](#closecalendarentry)
 
-[`public String CreateICSFile(String filePath)`](#createicsfile-filepath)
+[public String CreateICSFile(String)](#createicsfile-string)
 
-[`public String ReadICSFile(String filePath)`](#readicsfile-filepath)
+[public String ReadICSFile(String)](#readicsfile-string)
 
-[`public String DeleteICSFile(String filePath)`](#deleteicsfile-filepath)
+[public String DeleteICSFile(String)](#deleteicsfile-string)
 
 ---
 
-### ParseDateTimeToUTC (dateTime)
+### ParseDateTimeToUTC (String)
 
 ***Summary***
 
@@ -1746,7 +1955,7 @@ Console.WriteLine(HalloweenDateTime.ToString());
 
 ---
 
-### ParseDateTimeToLocal (dateTime)
+### ParseDateTimeToLocal (String)
 
 ***Summary***
 
@@ -1786,7 +1995,7 @@ Console.WriteLine(HalloweenDateTime.ToString());
 
 ---
 
-### CreateCalendarEntry (productID)
+### CreateCalendarEntry (String)
 
 ***Summary***
 
@@ -1840,7 +2049,7 @@ calendarManager.CreateGMTCalendarTimeZoneEntry();
 
 ---
 
-### CreateCalendarEvent (startTime, endTime, subject, location, description)
+### CreateCalendarEvent (DateTime, DateTime, String, String, String)
 
 ***Summary***
 
@@ -1884,7 +2093,7 @@ calendarManager.CreateCalendarEvent("2021-10-31T18:00:00+00:00", "2021-10-31T20:
 
 ---
 
-### CreateCalendarAlarmEntry (trigger, subject)
+### CreateCalendarAlarmEntry (Int32, String)
 
 ***Summary***
 
@@ -1964,7 +2173,7 @@ calendarManager.CloseCalendarEntry();
 
 ---
 
-### CreateICSFile (filePath)
+### CreateICSFile (String)
 
 ***Summary***
 
@@ -2004,7 +2213,7 @@ string validation = calendarManager.CreateICSFile(string filePath)
 
 ---
 
-### ReadICSFile (filePath)
+### ReadICSFile (String)
 
 ***Summary***
 
@@ -2044,7 +2253,7 @@ string results = calendarManager.ReadICSFile(string filePath)
 
 ---
 
-### DeleteICSFile (filePath)
+### DeleteICSFile (String)
 
 ***Summary***
 
@@ -2088,43 +2297,33 @@ string confirmation = calendarManager.DeleteICSFile(string filePath)
 
 **Samples**
 
-[`Example XML Document`](#example-xml-document)
-
-**Constructors** :
-
-[`public XMLManager()`]
+[Example XML Document](#example-xml-document)
 
 **Methods** :
 
-[`public bool GetNodeAttributeValueAsBool(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName)`](#getnodeattributevalueasbool-xmlfilelocation-nodepath-nodename-nodevalue-attributename)
+[public bool GetNodeAttributeValueAsBool(String, String, String, String, String)](#getnodeattributevalueasbool-string-string-string-string-string)
 
-[`public int GetNodeAttributeValueAsInt(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName)`](#getnodeattributevalueasint-xmlfilelocation-nodepath-nodename-nodevalue-attributename)
+[public int GetNodeAttributeValueAsInt(String, String, String, String, String)](#getnodeattributevalueasint-string-string-string-string-string)
 
-[`public void SetNodeAttributeValueFromBool(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName, bool attributeValue)`](#setnodeattributevaluefrombool-xmlfilelocation-nodepath-nodename-nodevalue-attributename-attributevalue)
+[public void SetNodeAttributeValueFromBool(String, String, String, String, String, Boolean)](#setnodeattributevaluefrombool-string-string-string-string-string-boolean)
 
-[`public void SetNodeAttributeValueFromInt(string xmlFileLocation, string nodePath, string nodeName, string nodeValue, string attributeName, int attributeValue)`](#setnodeattributevaluefromint-xmlfilelocation-nodepath-nodename-nodevalue-attributename-attributevalue)
+[public void SetNodeAttributeValueFromInt(String, String, String, String, String, Int32)](#setnodeattributevaluefromint-string-string-string-string-string-int32)
 
-[`public XmlDocument LoadXmlDocument(string xmlFileLocation)`](#loadxmldocument-xmlfilelocation)
+[public XmlDocument LoadXmlDocument(String)](#loadxmldocument-string)
 
-[`public XmlNodeList LoadNodeList(XmlDocument xmlDoc, string nodePath)`](#loadnodelist-xmldoc-nodepath)
+[public XmlNodeList LoadNodeList(XmlDocument, String)](#loadnodelist-xmldocument-string)
 
-[`public void SaveXmlDocument(XmlDocument xmlDoc, string xmlFileLocation)`](#savexmldocument-xmldoc-xmlfilelocation)
+[public void SaveXmlDocument(XmlDocument, String)](#savexmldocument-xmldocument-string)
 
-[`public XmlNode GetNodeFromNodeList(XmlNodeList nodeList, string nodeName, string nodeValue)`](#getnodefromnodelist-nodelist-nodename-nodevalue)
+[public XmlNode GetNodeFromNodeList(XmlNodeList, String, String)](#getnodefromnodelist-xmlnodelist-string-string)
 
-[`public XmlAttribute GetAttributeFromNodeList(XmlNodeList nodeList, string nodeName, string nodeValue, string attributeName)`](#getattributefromnodelist-nodelist-nodename-nodevalue-attributename)
+[public XmlAttribute GetAttributeFromNodeList(XmlNodeList, String, String, String)](#getattributefromnodelist-xmlnodelist-string-string-string)
 
-[`public string GetAttributeValueAsString(XmlAttribute attribute)`](#getattributevalueasstring-attribute)
+[public string GetAttributeValueAsString(XmlAttribute)](#getattributevalueasstring-xmlattribute)
 
-[`public int GetAttributeValueAsInt(XmlAttribute attribute)`](#getattributevalueasint-attribute)
+[public int GetAttributeValueAsInt(XmlAttribute)](#getattributevalueasint-xmlattribute)
 
-[`public bool GetAttributeValueAsBool(XmlAttribute attribute)`](#getattributevalueasbool-attribute)
-
-[`public bool GetNodeAttributeValueAsBool(XmlNode node, string attributeName)`](#getnodeattributevalueasbool-node-attributename)
-
-[`public XmlAttribute GetNodeAttribute(XmlNode node, string attributeName)`](#getnodeattribute-node-attributename)
-
-[`public void SetNodeAttributeFromBool(XmlNode node, string attributeName, bool attributeValue)`](#setnodeattributefrombool-node-attributename-attributevalue)
+[public bool GetAttributeValueAsBool(XmlAttribute)](#getattributevalueasbool-xmlattribute)
 
 ---
 
@@ -2162,7 +2361,7 @@ string confirmation = calendarManager.DeleteICSFile(string filePath)
 </Settings>
 ```
 
-### GetNodeAttributeValueAsBool (XmlFileLocation, NodePath, NodeName, NodeValue, AttributeName)
+### GetNodeAttributeValueAsBool (String, String, String, String, String)
 
 ***Summary***
 
@@ -2219,7 +2418,7 @@ bool isQualifyingSaved = xmlManager.GetNodeAttributeValueAsBool(filePath, "/Sett
 
 ---
 
-### GetNodeAttributeValueAsInt (XmlFileLocation, NodePath, NodeName, NodeValue, AttributeName)
+### GetNodeAttributeValueAsInt (String, String, String, String, String)
 
 ***Summary***
 
@@ -2275,7 +2474,7 @@ int reminderTriggerMins = xmlManager.GetNodeAttributeValueAsInt(filePath, "/Sett
 
 ---
 
-### SetNodeAttributeValueFromBool (XmlFileLocation, NodePath, NodeName, NodeValue, AttributeName, AttributeValue)
+### SetNodeAttributeValueFromBool (String, String, String, String, String, Boolean)
 
 ***Summary***
 
@@ -2329,7 +2528,7 @@ xmlManager.SetNodeAttributeValueFromBool(filePath, "/Settings/Formula1/Event", "
 
 ---
 
-### SetNodeAttributeValueFromInt (XmlFileLocation, NdePath, NodeName, NodeValue, AttributeName, AttributeValue)
+### SetNodeAttributeValueFromInt (String, String, String, String, String, Int32)
 
 ***Summary***
 
@@ -2383,7 +2582,7 @@ xmlManager.SetNodeAttributeValueFromInt(filePath, "/Settings/Formula1/Event", "N
 
 ---
 
-### LoadXmlDocument (XmlFileLocation)
+### LoadXmlDocument (String)
 
 ***Summary***
 
@@ -2423,7 +2622,7 @@ XmlDocument xmlDoc = xmlManager.LoadXmlDocument(filePath);
 
 ---
 
-### LoadNodeList (XmlDoc, NodePath)
+### LoadNodeList (XmlDocument, String)
 
 ***Summary***
 
@@ -2467,7 +2666,7 @@ XmlNodeList nodeList = xmlManager.LoadNodeList(xmlManager.LoadXmlDocument(filePa
 
 ---
 
-### SaveXmlDocument (XmlDoc, XmlFileLocation)
+### SaveXmlDocument (XmlDocument, String)
 
 ***Summary***
 
@@ -2509,7 +2708,7 @@ xmlManager.SaveXmlDocument(xmlDoc, filePath);
 
 ---
 
-### GetNodeFromNodeList (NodeList, NodeName, NodeValue)
+### GetNodeFromNodeList (XmlNodeList, String, String)
 
 ***Summary***
 
@@ -2562,7 +2761,7 @@ XmlNode node = xmlManager.GetNodeFromNodeList(nodeList, "Name", "Qualifying");
 
 ---
 
-### GetAttributeFromNodeList (NodeList, NodeName, NodeValue, AttributeName)
+### GetAttributeFromNodeList (XmlNodeList, String, String, String)
 
 ***Summary***
 
@@ -2618,7 +2817,7 @@ XmlAttribute elementAttribute = xmlManager.GetAttributeFromNodeList(nodeList, "N
 
 ---
 
-### GetAttributeValueAsString (Attribute)
+### GetAttributeValueAsString (XmlAttribute)
 
 ***Summary***
 
@@ -2664,7 +2863,7 @@ string stringAttributeValue = xmlManager.GetAttributeValueAsString(elementAttrib
 
 ---
 
-### GetAttributeValueAsInt (Attribute)
+### GetAttributeValueAsInt (XmlAttribute)
 
 ***Summary***
 
@@ -2714,7 +2913,7 @@ If attribute is null method will return 0.
 
 ---
 
-### GetAttributeValueAsBool (Attribute)
+### GetAttributeValueAsBool (XmlAttribute)
 
 ***Summary***
 
@@ -2766,27 +2965,23 @@ If attribute is null method will return false.
 
 ## EVLib.FileIO.EncryptorManager : [FileManager](#evlibfileiofilemanager)
 
-**Constructors** :
-
-[`public EncryptorManager()`]
-
 **Methods** :
 
-[`public Void EncryptToFile(String filePath, String stringToEncrypt, String password)`](#encrypttofile-filepath-stringtoencrypt-password)
+[public Void EncryptToFile(String, String, String)](#encrypttofile-string-string-string)
 
-[`public String EncryptToString(String stringToEncrypt, String password)`](#encrypttostring-stringtoencrypt-password)
+[public String EncryptToString(String, String)](#encrypttostring-string-string)
 
-[`public Byte[] EncryptToByteArray(String stringToEncrypt, String password)`](#encrypttobytearray-stringtoencrypt-password)
+[public Byte[] EncryptToByteArray(String, String)](#encrypttobytearray-string-string)
 
-[`public String DecryptFromFile(String filePath, String password)`](#decryptfromfile-filepath-password)
+[public String DecryptFromFile(String, String)](#decryptfromfile-string-string)
 
-[`public String DecryptFromString(String stringToDecrypt, String password)`](#decryptfromstring-stringtodecrypt-password)
+[public String DecryptFromString(String, String)](#decryptfromstring-string-string)
 
-[`public String DecryptFromByteArray(Byte[] byteArrayToDecrypt, String password)`](#decryptfrombytearray-bytearraytodecrypt-password)
+[public String DecryptFromByteArray(Byte[], String)](#decryptfrombytearray-byte-string)
 
 ---
 
-### EncryptToFile (filePath, stringToEncrypt, password)
+### EncryptToFile (String, String, String)
 
 ***Summary***
 
@@ -2832,7 +3027,7 @@ encryptor.EncryptToFile(filePath, decryptedSampleText, encryptionKey);
 
 ---
 
-### EncryptToString (stringToEncrypt, password)
+### EncryptToString (String, String)
 
 ***Summary***
 
@@ -2885,7 +3080,7 @@ Base64 encoding has been choosen for this purpose.
 
 ---
 
-### EncryptToByteArray (stringToEncrypt, password)
+### EncryptToByteArray (String, String)
 
 ***Summary***
 
@@ -2940,7 +3135,7 @@ Console.WriteLine(encryptedByteValues.ToString());
 
 ---
 
-### DecryptFromFile (filePath, password)
+### DecryptFromFile (String, String)
 
 ***Summary***
 
@@ -2986,7 +3181,7 @@ string decryptedFile = encryptor.DecryptFromFile(filePath, encryptionKey);
 
 ---
 
-### DecryptFromString (stringToDecrypt, password)
+### DecryptFromString (String, String)
 
 ***Summary***
 
@@ -3039,7 +3234,7 @@ Base64 encoding has been choosen for this purpose.
 
 ---
 
-### DecryptFromByteArray (byteArrayToDecrypt, password)
+### DecryptFromByteArray (Byte[], String)
 
 ***Summary***
 
@@ -3088,17 +3283,17 @@ Console.WriteLine(decryptedSampleText);
 ---
 
 ## [Obsolete]
-## EVLib.FileIO.EncryptionManager: [FileManager](#evlibfileiofilemanager)
+## EVLib.FileIO.EncryptionManager : [FileManager](#evlibfileiofilemanager)
 
 **Constructors** :
 
-[`public EncryptionManager()`](#encryptionmanager)
+[public EncryptionManager()](#encryptionmanager)
 
 **Methods** :
 
-[`public void EncryptStringToFile(string filePath, string dataToEncrypt, string keyPhrase)`](#encryptstringtofile-filepath-datatoencrypt-keyphrase)
+[public void EncryptStringToFile(String, String, String)](#encryptstringtofile-string-string-string)
 
-[`public string DecryptStringF romFile(string filePath, string keyPhrase)`](#decryptstringfromfile-filepath-keyphrase)
+[public string DecryptStringF romFile(String, String)](#decryptstringfromfile-string-string)
 
 ---
 
@@ -3122,7 +3317,7 @@ EVLib.FileIO.EncryptionManager encryptionManager = new EVLib.FileIO.EncryptionMa
 
 ---
 
-### EncryptStringToFile (filePath, DataToEncrypt, KeyPhrase)
+### EncryptStringToFile (String, String, String)
 
 ***Summary***
 
@@ -3168,7 +3363,7 @@ encryptionManager.EncryptStringToFile(filePath, decryptedSampleText, encryptionK
 
 ---
 
-### DecryptStringFromFile (filePath, KeyPhrase)
+### DecryptStringFromFile (String, String)
 
 ***Summary***
 
@@ -3216,7 +3411,7 @@ string decryptedSampleText = encryptionManager.DecryptStringFromFile(filePath, e
 
 # Interfaces
 
-[`IValueConverter`](#evlibinterfacesivalueconverter)
+[IValueConverter](#evlibinterfacesivalueconverter)
 
 ---
 
@@ -3224,13 +3419,13 @@ string decryptedSampleText = encryptionManager.DecryptStringFromFile(filePath, e
 
 **Methods** :
 
-[`public abstract Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)`](#convert-value-targettype-parameter-culture)
+[public abstract Object Convert(Object, Type, Object, CultureInfo)](#convert-object-type-object-cultureinfo)
 
-[`public abstract Object ConvertBack(Object value, Type targetType, Object parameter, CultureInfo culture)`](#convertback-value-targettype-parameter-culture)
+[public abstract Object ConvertBack(Object, Type, Object, CultureInfo)](#convertback-object-type-object-cultureinfo)
 
 ---
 
-### Convert (Value, TargetType, Parameter, Culture)
+### Convert (Object, Type, Object, CultureInfo))
 
 ***Summary***
 
@@ -3268,7 +3463,7 @@ A converted value. If the method returns null, the valid null value is used.
 
 ---
 
-### ConvertBack (Value, TargetType, Parameter, Culture)
+### ConvertBack (Object, Type, Object, CultureInfo))
 
 ***Summary***
 
@@ -3308,11 +3503,11 @@ A converted value. If the method returns null, the valid null value is used.
 
 # Mail
 
-[`Client`](#evlibmailclient)
+[Client](#evlibmailclient)
 
-[`MessageField`](#evlibmailmessagefield)
+[MessageField](#evlibmailmessagefield)
 
-[`ServerSettings`](#evlibmailserversettings)
+[ServerSettings](#evlibmailserversettings)
 
 ---
 
@@ -3320,32 +3515,32 @@ A converted value. If the method returns null, the valid null value is used.
 
 **Fields** :
 
-[`public MessageField Field`](#evlibmailmessagefield)
+[public MessageField Field](#evlibmailmessagefield)
 
-[`public ServerSettings Server`](#evlibmailserversettings)
+[public ServerSettings Server](#evlibmailserversettings)
 
 **Constructors** :
 
-[`public Client()`](#client)
+[public Client()](#client)
 
-[`public Client(ServerSettings serverSettings)`](#client-serversettings)
+[public Client(ServerSettings)](#client-serversettings)
 
-[`public Client(String host, Int32 port, Boolean enableSsl)`](#client-host-port-enablessl)
+[public Client(String, Int32, Boolean)](#client-string-int32-boolean)
 
-[`public Client(String host, Int32 port, String username, String password, Boolean enableSsl)`](#client-host-port-username-password-enablessl)
+[public Client(String, Int32, String, String, Boolean)](#client-string-int32-string-string-boolean)
 
 
 **Methods** :
 
-[`public String Send()`](#send)
+[public String Send()](#send)
 
-[`public String Send(MessageField messageField)`](#send-messagefield)
+[public String Send(MessageField messageField)](#send-messagefield)
 
-[`public String Send(String senderName, String senderEmail, String recipientName, String recipientEmail, String subject, String body, String attachmentPath = null) `](#send-sendername-senderemail-recipientname-recipientemail-subject-body-attachmentpath)
+[public String Send(String, String, String, String, String, String, String)](#send-string-string-string-string-string-string-string)
 
 ---
 
-### Client ()
+### Client
 
 ***Summary***
 
@@ -3400,7 +3595,7 @@ EVLib.Mail.Client mail = new EVLib.Mail.Client(serverSettings);
 
 ---
 
-### Client (Host, Port, EnableSSL)
+### Client (String, Int32, Boolean)
 
 ***Summary***
 
@@ -3439,7 +3634,7 @@ This will use the credentials of the current logged in user.
 
 ---
 
-### Client (Host, Port, UserName, Password, EnableSSL)
+### Client (String, Int32, String, String, Boolean)
 
 ***Summary***
 
@@ -3532,7 +3727,7 @@ string confirmation = mail.Send();
 
 ---
 
-### Send (messageField)
+### Send (MessageField)
 
 ***Summary***
 
@@ -3585,7 +3780,7 @@ string confirmation = mail.Send(messageField);
 
 ---
 
-### Send (senderName, senderEmail, recipientName, recipientEmail, subject, body, attachmentPath)
+### Send (String, String, String, String, String, String, String)
 
 ***Summary***
 
@@ -3646,17 +3841,13 @@ string confirmation = mail.Send("Sender", "sender@host.com", "Recipient", "recip
 
 ## EVLib.Mail.MessageField
 
-**Constructors** :
-
-[`public MessageField()`]
-
 **Methods** :
 
-[`public MessageField(String senderName, String senderEmail, String recipientName, String recipientEmail, String subject, String body, String attachmentPath = null)`](#messagefield-sendername-senderemail-recipientname-recipientemail-subject-body-attachmentpath)
+[public MessageField(String, String, String, String, String, String, String)](#messagefield-string-string-string-string-string-string-string)
 
 ---
 
-### MessageField (senderName, senderEmail, recipientName, recipientEmail, subject, body, attachmentPath)
+### MessageField (String, String, String, String, String, String, String)
 
 ***Summary***
 
@@ -3715,19 +3906,15 @@ EVLib.Mail.MessageField messageField = new EVLib.Mail.MessageField()
 ---
 ## EVLib.Mail.ServerSettings
 
-**Constructors** :
-
-[`public ServerSettings()`]
-
 **Methods** :
 
-[`public ServerSettings(String host, Int32 port, String username, String password, Boolean enableSsl)`](#serversettings-host-port-username-password-enablessl)
+[public ServerSettings(String, Int32, String, String, Boolean)](#serversettings-string-int32-string-string-boolean)
 
-[`public ServerSettings(String host, Int32 port, Boolean enableSsl)`](#serversettings-host-port-enablessl)
+[public ServerSettings(String, Int32, Boolean)](#serversettings-string-int32-boolean)
 
 ---
 
-### ServerSettings (host, port, username, password, enableSSL)
+### ServerSettings (String, Int32, String, String, Boolean)
 
 ***Summary***
 
@@ -3776,7 +3963,7 @@ EVLib.Mail.ServerSettings serverSettings = new EVLib.Mail.ServerSettings()
 
 ---
 
-### ServerSettings (host, port, enableSSL)
+### ServerSettings (String, Int32, Boolean)
 
 ***Summary***
 
@@ -3823,29 +4010,25 @@ This will use the credentials of the current logged in user.
 
 # Mathamatics
 
-[`Calculate`](#evlibmathamaticscalculate)
+[Calculate](#evlibmathamaticscalculate)
 
-[`Cipher`](#evlibmathamaticscipher)
+[Cipher](#evlibmathamaticscipher)
 
 ---
 
 ## EVLib.Mathamatics.Calculate
 
-**Constructors** :
-
-[`public Calculate()`]
-
 **Methods** :
 
-[`public Int64 Power(Int32 baseNumber, Int32 exponent)`](#power-basenumber-exponent)
+[public Int64 Power(Int32, Int32)](#power-int32-int32)
 
-[`public Double Average(List<Double> listOfNumbers)`](#average-listofnumbers)
+[public Double Average(List Double)](#average-list-double)
 
-[`public Int32 RandomNumber(Int32 minimumValue, Int32 maximumValue)`](#randomnumber-minimumvalue-maximumvalue)
+[public Int32 RandomNumber(Int32, Int32)](#randomnumber-int32-int32)
 
 ---
 
-### Power (BaseNumber, Exponent)
+### Power (Int32, Int32)
 
 ***Summary***
 
@@ -3897,7 +4080,7 @@ The power or exponent of a number says how many times to use the number in multi
 
 ---
 
-### Average (ListOfNumbers)
+### Average (List Double)
 
 ***Summary***
 
@@ -3942,7 +4125,7 @@ Console.WriteLine(result.toString());
 The average of a set of numbers is simply the sum of the numbers divided by the total number of values in the set.
 
 ---
-### RandomNumber (MinimumValue, MaximumValue)
+### RandomNumber (Int32, Int32)
 
 ***Summary***
 
@@ -3988,19 +4171,15 @@ Using an instance of an encryption class (RNGCryptoServiceProvider) is better at
 
 ## EVLib.Mathamatics.Cipher
 
-**Constructors** :
-
-[`public Cipher()`]
-
 **Methods** :
 
-[`public String Encode(String data, String key)`](#encode-data-key)
+[public String Encode(String, String)](#encode-string-string)
 
-[`public String Decode(String data, String key)`](#decode-data-key)
+[public String Decode(String, String)](#decode-string-string)
 
 ---
 
-### Encode (Data, Key)
+### Encode (String, String)
 
 ***Summary***
 
@@ -4054,7 +4233,7 @@ The optimal solution is to have a key of the same length than the source string.
 
 ---
 
-### Decode (Data, Key)
+### Decode (String, String)
 
 ***Summary***
 
